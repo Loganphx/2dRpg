@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-
-namespace RPGM.Gameplay
+namespace Scripts.Gameplay
 {
     /// <summary>
     /// A simple camera follower class. It saves the offset from the
@@ -13,17 +11,26 @@ namespace RPGM.Gameplay
     {
         public Transform focus;
         public float smoothTime = 2;
+        public float offsetFloat;
+        Vector3 _offset;
 
-        Vector3 offset;
-
-        void Awake()
+        private void Awake()
         {
-            offset = focus.position - transform.position;
+            UpdateCamera();
         }
 
-        void Update()
+        public void UpdateCamera()
         {
-            transform.position = Vector3.Lerp(transform.position, focus.position - offset, Time.deltaTime * smoothTime);
+            var position = transform.position;
+            var position1 = focus.position;
+            
+            position = Vector3.Lerp(
+                position,
+                new Vector3(position1.x, position1.y, position.z),
+                Time.deltaTime * smoothTime
+            );
+
+            transform.position = position;
         }
     }
-}
+}    

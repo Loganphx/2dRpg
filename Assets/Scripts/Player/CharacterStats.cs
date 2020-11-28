@@ -1,22 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Stats;
 using UnityEngine;
 
-public class CharacterStats : MonoBehaviour
-{    
-    public float playerHealth;
-    public float playerDamage;
-    public float playerAttackRate;
+namespace Player
+{
+    public class CharacterStats : MonoBehaviour
+    {    
+        public Health HealthController;
+        public Damage DamageController;
+        public Speed SpeedController;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+        // Start is called before the first frame update
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }

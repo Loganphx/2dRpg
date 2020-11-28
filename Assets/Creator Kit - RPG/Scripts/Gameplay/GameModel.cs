@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Inventory;
 using RPGM.Core;
 using RPGM.Gameplay;
 using RPGM.UI;
@@ -50,7 +51,7 @@ namespace RPGM.Gameplay
             c += item.count;
             inventorySprites[item.name] = item.sprite;
             inventory[item.name] = c;
-            inventoryController.Refresh();
+            // inventoryController.Refresh();
         }
 
         public bool HasInventoryItem(string name, int count = 1)
@@ -67,7 +68,7 @@ namespace RPGM.Gameplay
             c -= count;
             if (c < 0) return false;
             inventory[item.name] = c;
-            inventoryController.Refresh();
+            // inventoryController.Refresh();
             return true;
         }
 

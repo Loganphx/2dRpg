@@ -25,6 +25,8 @@ public class PlayerScript : MonoBehaviour
 
     private void HandleMovement()
     {
+        
+        ;
         float moveX = 0f;
         float moveY = 0f;
 

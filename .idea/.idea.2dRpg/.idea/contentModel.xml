@@ -8,6 +8,7 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AiCharacterController.cs" t="Include" />
         <e p="Creator Kit - RPG" t="Include">
           <e p="Cutscene" t="Include">
             <e p="Editor" t="Include">
@@ -185,7 +186,6 @@
             <e p="UI" t="Include">
               <e p="DialogController.cs" t="Include" />
               <e p="DialogLayout.cs" t="Include" />
-              <e p="InventoryController.cs" t="Include" />
               <e p="MessageBar.cs" t="Include" />
               <e p="SpriteButton.cs" t="Include" />
               <e p="SpriteUIElement.cs" t="Include" />
@@ -345,6 +345,7 @@
             </e>
           </e>
         </e>
+        <e p="MouseInputUIBlocker.cs" t="Include" />
         <e p="Photon" t="Include">
           <e p="PhotonChat" t="Include">
             <e p="Code" t="Include">
@@ -708,7 +709,20 @@
             </e>
           </e>
         </e>
+        <e p="Pickup Item.cs" t="Include" />
+        <e p="PlaceItemIntoInventory.cs" t="Include" />
         <e p="Scripts" t="Include">
+          <e p="Interactable.cs" t="Include" />
+          <e p="Inventory" t="Include">
+            <e p="InventoryController.cs" t="Include" />
+            <e p="InventoryController2.cs" t="Include" />
+          </e>
+          <e p="Items" t="Include">
+            <e p="CharacterItem.cs" t="Include" />
+            <e p="Item.cs" t="Include" />
+            <e p="ItemDatabase.cs" t="Include" />
+          </e>
+          <e p="MoveDirection.cs" t="Include" />
           <e p="Player" t="Include">
             <e p="CharacterStats.cs" t="Include" />
             <e p="PlayerScript.cs" t="Include" />
@@ -716,8 +730,19 @@
           </e>
           <e p="Projectiles" t="Include">
             <e p="Fireball" t="Include">
-              <e p="FireballScript.cs" t="Include" />
+              <e p="ProjectileController.cs" t="Include" />
             </e>
+            <e p="Projectile.cs" t="Include" />
+          </e>
+          <e p="Stats" t="Include">
+            <e p="Damage.cs" t="Include" />
+            <e p="Health.cs" t="Include" />
+            <e p="Speed.cs" t="Include" />
+          </e>
+          <e p="UI" t="Include">
+            <e p="FollowMousePosition.cs" t="Include" />
+            <e p="UIInventory.cs" t="Include" />
+            <e p="UIItem.cs" t="Include" />
           </e>
         </e>
         <e p="TextMesh Pro" t="Include">

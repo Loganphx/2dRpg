@@ -23,7 +23,7 @@ namespace UI
             _selectedItem = GameObject.Find("SelectedItem").GetComponent<UIItem>();
 
         }
-        
+
         /// <summary>
         /// Updates item's sprite and color
         /// </summary>
@@ -63,23 +63,15 @@ namespace UI
                 _selectedItem.UpdateItem(null);
             }
         }
-
-        public void OnPointerDown()
+        public static bool IsPointerOverUIObject()
         {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            Debug.Log("OVER");
+            return results.Count > 0;
             
-        }
-
-        public void OnPointerUp()
-        {
-            
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    Debug.Log("DROP");
-                }
         }
     }
 }

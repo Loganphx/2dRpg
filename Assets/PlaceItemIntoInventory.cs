@@ -18,5 +18,5 @@ public class PlaceItemIntoInventory : MonoBehaviour
             inventory.GiveItem(other.gameObject.GetComponent<CharacterItem>().Name);
             Destroy(other.gameObject);
         }
-    }
+     
 }

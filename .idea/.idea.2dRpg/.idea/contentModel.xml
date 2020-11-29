@@ -712,6 +712,7 @@
         <e p="Pickup Item.cs" t="Include" />
         <e p="PlaceItemIntoInventory.cs" t="Include" />
         <e p="Scripts" t="Include">
+          <e p="Heart.cs" t="Include" />
           <e p="Interactable.cs" t="Include" />
           <e p="Inventory" t="Include">
             <e p="InventoryController.cs" t="Include" />
@@ -741,9 +742,13 @@
           </e>
           <e p="UI" t="Include">
             <e p="FollowMousePosition.cs" t="Include" />
+            <e p="Health" t="Include">
+              <e p="HealthVisual.cs" t="Include" />
+            </e>
             <e p="UIInventory.cs" t="Include" />
             <e p="UIItem.cs" t="Include" />
           </e>
+          <e p="UIHeart.cs" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Resources" t="Include">

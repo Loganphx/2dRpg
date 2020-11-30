@@ -5,9 +5,11 @@ using Bolt;
 using DefaultNamespace;
 using Ludiq;
 using Player;
+using Projectiles;
 using Projectiles.Fireball;
 using RPGM.Gameplay;
 using Scripts.Gameplay;
+using Stats;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.U2D;
@@ -49,6 +51,8 @@ namespace RPGM.Gameplay
         PixelPerfectCamera _pixelPerfectCamera;
         
         public CharacterStats characterStatsController;
+
+        private bool projectileFireRateLock;
         
         enum State
         {
@@ -63,7 +67,6 @@ namespace RPGM.Gameplay
         float velocity;
 
         public GameObject fireballPrefab;
-        public GameObject projectileScript;
         [SerializeField] private MoveDirection lastMovedDirection;
 
         private void Start()
@@ -320,25 +323,96 @@ namespace RPGM.Gameplay
         /// </summary>
         void HandleProjectileShooting()
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (projectileFireRateLock != true)
             {
-                ShootProjectile(MoveDirection.Down);
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                ShootProjectile(MoveDirection.Right);
-            }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                ShootProjectile(MoveDirection.Left);
-            }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                ShootProjectile(MoveDirection.Up);
+                bool projectileShot = false;
+                MoveDirection lastKeyPress = MoveDirection.None;
+                if (keyStrokeOrder.Count >= 2)
+                {
+                    lastKeyPress = keyStrokeOrder[keyStrokeOrder.Count - 2];
+                    if (lastKeyPress == MoveDirection.Right && Input.GetKeyDown(KeyCode.UpArrow) ||
+                        lastKeyPress == MoveDirection.Up && Input.GetKeyDown(KeyCode.RightArrow))
+                    {
+                        ShootProjectile(MoveDirection.UpLeft);
+                        projectileShot = true;
+                        projectileFireRateLock = true;
+                        StartCoroutine(ProjectileLock(GetComponent<Damage>().attackRate));
+                    }
+
+                    if (lastKeyPress == MoveDirection.Left && Input.GetKeyDown(KeyCode.UpArrow) ||
+                        lastKeyPress == MoveDirection.Up && Input.GetKeyDown(KeyCode.LeftArrow))
+                    {
+                        ShootProjectile(MoveDirection.UpRight);
+                        projectileShot = true;
+                        projectileFireRateLock = true;
+                        StartCoroutine(ProjectileLock(GetComponent<Damage>().attackRate));
+                    }
+
+                    if (lastKeyPress == MoveDirection.Right && Input.GetKeyDown(KeyCode.DownArrow) ||
+                        lastKeyPress == MoveDirection.Down && Input.GetKeyDown(KeyCode.RightArrow))
+                    {
+                        ShootProjectile(MoveDirection.DownLeft);
+                        projectileShot = true;
+                        projectileFireRateLock = true;
+                        StartCoroutine(ProjectileLock(GetComponent<Damage>().attackRate));
+                    }
+
+                    if (lastKeyPress == MoveDirection.Left && Input.GetKeyDown(KeyCode.DownArrow) ||
+                        lastKeyPress == MoveDirection.Down && Input.GetKeyDown(KeyCode.LeftArrow))
+                    {
+                        ShootProjectile(MoveDirection.DownRight);
+                        projectileShot = true;
+                        projectileFireRateLock = true;
+                        StartCoroutine(ProjectileLock(GetComponent<Damage>().attackRate));
+                    }
+                }
+
+                if (projectileShot == false)
+                {
+                    if (Input.GetKeyDown(KeyCode.DownArrow))
+                    {
+                        projectileShot = true;
+                        projectileFireRateLock = true;
+                        ShootProjectile(MoveDirection.Down);
+                        StartCoroutine(ProjectileLock(GetComponent<Damage>().attackRate));
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.RightArrow))
+                    {
+                        projectileShot = true;
+                        projectileFireRateLock = true;
+                        ShootProjectile(MoveDirection.Right);
+                        StartCoroutine(ProjectileLock(GetComponent<Damage>().attackRate));
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.LeftArrow))
+                    {
+                        projectileShot = true;
+                        projectileFireRateLock = true;
+                        ShootProjectile(MoveDirection.Left);
+                        StartCoroutine(ProjectileLock(GetComponent<Damage>().attackRate));
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.UpArrow))
+                    {
+                        projectileShot = true;
+                        projectileFireRateLock = true;
+                        ShootProjectile(MoveDirection.Up);
+                        StartCoroutine(ProjectileLock(GetComponent<Damage>().attackRate));
+                    }
+                }
             }
         }
+        
+        private IEnumerator ProjectileLock(float attackRate)
+        {
+            yield return new WaitForSeconds(attackRate);
+            projectileFireRateLock = false;
+        }
+
         void ShootProjectile(MoveDirection moveDirection)
         {
+            Debug.Log($"shoot projectile in {moveDirection}");
             var characterControllerPosition = rigidBody2D.position;
             _velocitizedSpeed = _speed * velocity;
             
@@ -348,8 +422,30 @@ namespace RPGM.Gameplay
                     characterControllerPosition.y += -2.0f;
                     Instantiate(fireballPrefab, characterControllerPosition, rigidBody2D.transform.rotation);
                     break;
+                case MoveDirection.DownRight:
+                    characterControllerPosition.x += 2.0f;
+                    characterControllerPosition.y += -2.0f;
+                    Instantiate(fireballPrefab, characterControllerPosition, rigidBody2D.transform.rotation);
+                    break;
+                case MoveDirection.DownLeft:
+                    characterControllerPosition.x += -2.0f;
+                    characterControllerPosition.y += -2.0f;
+                    Instantiate(fireballPrefab, characterControllerPosition, rigidBody2D.transform.rotation);
+                    break;
                     
                 case MoveDirection.Up:
+                    characterControllerPosition.y += 2.0f;
+                    Instantiate(fireballPrefab, characterControllerPosition, rigidBody2D.transform.rotation);
+                    break;    
+                
+                case MoveDirection.UpRight:
+                    characterControllerPosition.x += 4.0f;
+                    characterControllerPosition.y += 2.0f;
+                    Instantiate(fireballPrefab, characterControllerPosition, rigidBody2D.transform.rotation);
+                    break;   
+                
+                case MoveDirection.UpLeft:
+                    characterControllerPosition.x += -4.0f;
                     characterControllerPosition.y += 2.0f;
                     Instantiate(fireballPrefab, characterControllerPosition, rigidBody2D.transform.rotation);
                     break;

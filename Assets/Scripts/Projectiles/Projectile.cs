@@ -29,7 +29,22 @@ namespace Projectiles
             {
                 spriteRenderer.flipX = true;
                 projectileGameObject.transform.rotation = Quaternion.Euler(0, 0, -90);
-                rigidBody.velocity = Vector2.up + new Vector2(0, playerSpeed + projectileSpeed);
+                rigidBody.velocity = Vector2.up + new Vector2(0, projectileSpeed);
+                Debug.Log($"x: {rigidBody.velocity.x}, y: {rigidBody.velocity.y}");
+            }            
+            
+            if (moveDirection == MoveDirection.UpRight)
+            {
+                spriteRenderer.flipX = false;
+                projectileGameObject.transform.rotation = Quaternion.Euler(0, 0, 45);
+                rigidBody.velocity = Vector2.up + Vector2.right + new Vector2(0, projectileSpeed); //+ playerSpeed);
+                Debug.Log($"x: {rigidBody.velocity.x}, y: {rigidBody.velocity.y}");
+            }            
+            
+            if (moveDirection == MoveDirection.UpLeft)
+            {
+                projectileGameObject.transform.rotation = Quaternion.Euler(0, 0, 120);
+                rigidBody.velocity = Vector2.up + Vector2.left + new Vector2(0, projectileSpeed); // + playerSpeed);
                 Debug.Log($"x: {rigidBody.velocity.x}, y: {rigidBody.velocity.y}");
             }
 
@@ -37,18 +52,32 @@ namespace Projectiles
             {
                 spriteRenderer.flipX = true;
                 rigidBody.transform.rotation = Quaternion.Euler(0, 0, -270);
-                rigidBody.velocity = Vector2.down + new Vector2(0, - playerSpeed - projectileSpeed);
+                rigidBody.velocity = Vector2.down + new Vector2(0, - projectileSpeed);
+            }
+            
+            if (moveDirection == MoveDirection.DownRight)
+            {
+                spriteRenderer.flipX = true;
+                rigidBody.transform.rotation = Quaternion.Euler(0, 0, 45);
+                rigidBody.velocity =
+                    Vector2.down + Vector2.right + new Vector2(0, -projectileSpeed); // - playerSpeed );
+            }
+            
+            if (moveDirection == MoveDirection.DownLeft)
+            {
+                rigidBody.transform.rotation = Quaternion.Euler(0, 0, 120);
+                rigidBody.velocity = Vector2.down + Vector2.left + new Vector2(0, -projectileSpeed); // - playerSpeed );
             }
 
             if (moveDirection == MoveDirection.Right)
             {
                 spriteRenderer.flipX = false;
-                rigidBody.velocity = (Vector2.right + new Vector2(playerSpeed + projectileSpeed, 0));
+                rigidBody.velocity = (Vector2.right + new Vector2(+projectileSpeed, 0)); // + playerSpeed, 0));
             }
             if (moveDirection == MoveDirection.Left)
             {
                 spriteRenderer.flipX = true;
-                rigidBody.velocity = (Vector2.left + new Vector2(- playerSpeed - projectileSpeed, 0));
+                rigidBody.velocity = (Vector2.left + new Vector2(-projectileSpeed, 0)); // - playerSpeed , 0));
             }
         }
         

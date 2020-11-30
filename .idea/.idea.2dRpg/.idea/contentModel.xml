@@ -6,7 +6,6 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="AiCharacterController.cs" t="Include" />
         <e p="Creator Kit - RPG" t="Include">
           <e p="Cutscene" t="Include">
             <e p="Editor" t="Include">
@@ -344,7 +343,6 @@
           </e>
         </e>
         <e p="MouseInputUIBlocker.cs" t="Include" />
-        <e p="PathFindingController.cs" t="Include" />
         <e p="Photon" t="Include">
           <e p="PhotonChat" t="Include">
             <e p="Code" t="Include">
@@ -720,6 +718,7 @@
             </e>
             <e p="PathFinding" t="Include">
               <e p="MoveCost.cs" t="Include" />
+              <e p="PathFindingController.cs" t="Include" />
             </e>
           </e>
           <e p="Heart.cs" t="Include" />
@@ -751,6 +750,7 @@
             <e p="Speed.cs" t="Include" />
           </e>
           <e p="Tiles" t="Include">
+            <e p="TileMapController.cs" t="Include" />
             <e p="WorldTile.cs" t="Include" />
           </e>
           <e p="UI" t="Include">
@@ -795,7 +795,6 @@
             <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
-        <e p="TileMapController.cs" t="Include" />
         <e p="TutorialInfo" t="Include">
           <e p="Scripts" t="Include">
             <e p="Editor" t="Include">

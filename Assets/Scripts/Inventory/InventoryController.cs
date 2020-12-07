@@ -9,12 +9,14 @@ namespace Inventory
     public class InventoryController : MonoBehaviour
     {
         public List<Item> characterItems = new List<Item>();
-        public ItemDatabase itemDatabase;
+        private ItemDatabase _itemDatabase;
         public UIInventory inventoryUI;
         public void Start()
         {
+            _itemDatabase = GameObject.Find("Item Database").GetComponent<ItemDatabase>();
+
             GiveItem("Sword");
-            foreach (var item in itemDatabase.items)
+            foreach (var item in _itemDatabase.items)
             {
                 GiveItem(item.Value.itemName);
             }
@@ -27,9 +29,8 @@ namespace Inventory
         /// <param name="itemName"></param>
         public void GiveItem(string itemName)
         {
-            var itemToAdd = itemDatabase.GetItem(itemName);
+            var itemToAdd = _itemDatabase.GetItem(itemName);
             characterItems.Add(itemToAdd);
-            Debug.Log("ADDED ITEM: " + itemToAdd.itemName);
             inventoryUI.AddNewItem(itemToAdd);    
 
         }
@@ -56,7 +57,6 @@ namespace Inventory
             if (item == null) return;
             characterItems.Remove(item);
             inventoryUI.RemoveItem(item);
-            Debug.Log("Item removed: " + item.itemName);
         }
     }
 }

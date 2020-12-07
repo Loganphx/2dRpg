@@ -6,7 +6,7 @@ namespace Stats
     {
         public float baseDamage;
         public float attackRate;
-        
+
 
         /// <summary>
         /// Damages Character and will trigger animation on death threshold.

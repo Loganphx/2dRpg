@@ -1,4 +1,4 @@
-﻿%YAML 1.1
+%YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
 OcclusionCullingSettings:
@@ -55902,9 +55902,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e7952efb9ccfe4ebe762a03a6048ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 0
-  playerDamage: 0
-  playerAttackRate: 0
+  HealthController: {fileID: 0}
+  DamageController: {fileID: 0}
+  SpeedController: {fileID: 0}
 --- !u!114 &723980521 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 353955888, guid: 74b5c6b26f0fc4028b9aac1a7a36767d,

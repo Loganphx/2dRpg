@@ -17,6 +17,7 @@ namespace Items
         public float attackSpeed;
         public float health;
         public float moveSpeed;
+        public int maxLife;
         #endregion
         
         /// <summary>
@@ -31,7 +32,8 @@ namespace Items
         /// <param name="attackSpeed"></param>
         /// <param name="health"></param>
         /// <param name="moveSpeed"></param>
-        public Item(int id, string itemName, string description, Sprite icon, float damage, float addedProjectiles, float attackSpeed, float health, float moveSpeed)
+        /// <param name="maxLife"></param>
+        public Item(int id, string itemName, string description, Sprite icon, float damage, float addedProjectiles, float attackSpeed, float health, float moveSpeed, int maxLife)
         {
             this.id = id;
             this.itemName = itemName;
@@ -42,6 +44,7 @@ namespace Items
             this.attackSpeed = attackSpeed;
             this.health = health;
             this.moveSpeed = moveSpeed;
+            this.maxLife = maxLife;
 
 
         }
@@ -61,6 +64,7 @@ namespace Items
             this.attackSpeed = item.attackSpeed;
             this.health = item.health;
             this.moveSpeed = item.moveSpeed;
+            this.maxLife = item.maxLife;
 
         }
     }

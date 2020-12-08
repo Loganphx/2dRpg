@@ -10,12 +10,13 @@ namespace Stats
         
         public void ChangeHealth(float amount)
         {
-            baseHealth += amount;
+            baseHealth -= amount;
             if (baseHealth <= 0)
             {
                 // animate death 
                 Destroy(this.GameObject());
             }
+            
         }
     }
 }

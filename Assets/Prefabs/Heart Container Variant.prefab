@@ -26,7 +26,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 1
-  icon: {fileID: 21300000, guid: a3c372dc062ce9c4faf860297b3f862e, type: 3}
+  fullHeart: {fileID: 21300000, guid: 261f555b17b56c745a16e1bf1667f867, type: 3}
+  halfHeart: {fileID: 21300000, guid: 1e101f921b42e0444b52350039556831, type: 3}
+  emptyHeart: {fileID: 21300000, guid: da48cb764e4db804995859d41394c34d, type: 3}
 --- !u!1001 &7088346649490314665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34,11 +36,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 609088388359210484, guid: c029aca2593f0c74da5be7988eb5d4c3,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2464229351261754071, guid: c029aca2593f0c74da5be7988eb5d4c3,
         type: 3}
       propertyPath: m_Name
-      value: Heart Container
+      value: Heart Container Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4704475930978841920, guid: c029aca2593f0c74da5be7988eb5d4c3,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 261f555b17b56c745a16e1bf1667f867,
+        type: 3}
     - target: {fileID: 6900799018991561457, guid: c029aca2593f0c74da5be7988eb5d4c3,
         type: 3}
       propertyPath: m_Pivot.x

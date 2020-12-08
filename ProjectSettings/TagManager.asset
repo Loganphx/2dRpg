@@ -7,6 +7,9 @@ TagManager:
   - Walls
   - AI
   - PickupItem
+  - DamagePlayerStatic
+  - Door
+  - Room
   - Heart
   layers:
   - Default

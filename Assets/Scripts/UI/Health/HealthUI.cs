@@ -27,7 +27,7 @@ namespace UI.Health
                 instance.tag = "Heart";
                 uiHearts.Add(instance.GetComponentInChildren<UIHeart>());
             }
-            lastDamagedHeart = uiHearts.Count - 1;
+            lastDamagedHeart = uiHearts.Count;
             numberOfHearts = uiHearts.Count;
             
 
@@ -90,7 +90,22 @@ namespace UI.Health
                 Debug.Log("You have died.");
             }
         }
-
+        
+        public Dictionary<float, List<UIHeart>> getHearts()
+        {
+            var dict = new Dictionary<float, List<UIHeart>>();
+            foreach (var heart in uiHearts)
+            {
+                var uiHeart = heart.GetComponentInChildren<UIHeart>();
+                var key = uiHeart.heart.amount;
+                if(!dict.ContainsKey(key))
+                {
+                    dict.Add(key, new List<UIHeart>());
+                } 
+                dict[key].Add(uiHeart);
+            }
+            return dict;
+        }
         public void AddHearts(int amount)
         {
             Debug.Log(amount);
@@ -117,41 +132,53 @@ namespace UI.Health
                 index++;
             }
             var hearts = GameObject.FindGameObjectsWithTag ("Heart");
-            var oldData = new List<UIHeart>();
+            var data = new Dictionary<float, List<UIHeart>>();
             foreach (var heart in hearts)
             {
-                oldData.Add(heart.GetComponentInChildren<UIHeart>());
+                var uiHeart = heart.GetComponentInChildren<UIHeart>();
+                var key = uiHeart.heart.amount;
+                if(!data.ContainsKey(key))
+                {
+                    data.Add(key, new List<UIHeart>());
+                } 
+                data[key].Add(uiHeart);
                 Destroy(heart);
             }
-            Debug.Log(oldData.Count);
-            Debug.Log(uiHearts.Count);
-            var tempData = new List<UIHeart>();
-            foreach (var heart in oldData)
+            var indexed = false;
+            uiHearts.RemoveAll(i => i != null);
+            foreach (var key in data.Keys)
             {
-                if (heart.heart.amount == 1)
+                var list = data[key];
+                for (var i = 0; i < list.Count; i++)
                 {
-                    tempData.Add(heart);
-                }
-            }
+                    var instance = Instantiate(heartPrefab, heartSlots.position, Quaternion.identity);
+                    instance.transform.SetParent(heartSlots);
+                    instance.transform.localScale = new Vector3(1,1,1);
+                    instance.tag = "Heart";
+                    var heartAmount = list[i].heart.amount;
+                    uiHearts.Add(instance.GetComponentInChildren<UIHeart>());
+                    var tempIndex = uiHearts.Count - 1;
 
-            foreach (var heart in oldData)
-            {
-                if (heart.heart.amount != 1)
-                {
-                    tempData.Add(heart);
+                    uiHearts[tempIndex].UpdateHeart(list[i].heart);
+                    if(indexed == false)
+                    {
+                        if (heartAmount != 1)
+                        {
+                            lastDamagedHeart = uiHearts.Count-1;
+                            indexed = true;
+
+                        }
+                    }
                 }
             }
-            for(var i = 0; i < uiHearts.Count; i++)
+            numberOfHearts = uiHearts.Count;
+            if (!indexed)
             {
-                var instance = Instantiate(heartPrefab, heartSlots.position, Quaternion.identity);
-                instance.transform.SetParent(heartSlots);
-                instance.transform.localScale = new Vector3(1,1,1);
-                instance.tag = "Heart";
-                uiHearts[i] = instance.GetComponentInChildren<UIHeart>();
-                uiHearts[i].UpdateHeart(tempData[i].heart);
-                lastDamagedHeart = uiHearts.Count;
-                numberOfHearts = uiHearts.Count;
+                lastDamagedHeart = uiHearts.Count-1;
+                indexed = true;
             }
+            
+            
             
         }
     }

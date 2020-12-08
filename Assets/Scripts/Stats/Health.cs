@@ -10,7 +10,6 @@ namespace Stats
         
         public void ChangeHealth(float amount)
         {
-            Debug.Log(baseHealth + " " + amount);
             baseHealth -= amount;
             if (baseHealth <= 0)
             {

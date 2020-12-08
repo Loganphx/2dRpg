@@ -24,15 +24,19 @@ public class DamagePlayer : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("HIT");
-        if (other.gameObject.CompareTag("Player"))
+        if (!gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<HeartController>().DamagePlayer(_damage);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                var heartController = other.gameObject.GetComponent<HeartController>();
+                if (_damage > 0)
+                    heartController.DamagePlayer(_damage);
+                else if (_damage < 0)
+                    heartController.HealPlayer(_damage);
+            }
+            else
+            {
+            }
         }
-        else
-        {
-            other.gameObject.GetComponent<Health>().ChangeHealth(_damage);
-        }
-
-    
     }
 }

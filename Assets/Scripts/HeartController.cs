@@ -1,5 +1,8 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Player;
 using Stats;
@@ -47,48 +50,50 @@ public class HeartController : MonoBehaviour
 
     public void HealPlayer(float damage)
     {
-        var index = int.Parse(heartUI.lastDamagedHeart + "");
-        if (index >= heartUI.uiHearts.Count) return;
-        var heart = heartUI.uiHearts[index];
-        Debug.Log("ERROR?");
-        if (heart.heart.amount == 0)
+        if (-damage % 0.5 == 0)
         {
-            if (damage == -1)
-            {
-                heart.heart.amount += 1;
-                heart.UpdateHeart(heart.heart);
-                Debug.Log(heart.heart.amount);
-                gameObject.GetComponent<CharacterStats>().HealthController.ChangeHealth(damage);
-                if (Math.Abs(heart.heart.amount - 1) < 0.05)
-                {
-                    heartUI.lastDamagedHeart += 1;
-                    heartUI.numberOfHearts++;
-                }
-            }
+            var index = -1;
+            var count = -damage / 0.5;
+            var indexes = new List<int>();
 
-        }
-        else if (heart.heart.amount == 0.5)
-        {
-            if (damage == -1)
-            {
-                for (var i = 0; i < 2; i++)
+            foreach (var item in heartUI.uiHearts)
                 {
-                    if (heartUI.lastDamagedHeart <= heartUI.uiHearts.Count - 1)
+                    index++;
+                    if (item.heart.amount < 1)
                     {
-                        heart = heartUI.uiHearts[heartUI.lastDamagedHeart];
-                        heart.heart.amount += 0.5f;
-                        heart.UpdateHeart(heart.heart);
-                        gameObject.GetComponent<CharacterStats>().HealthController.ChangeHealth(damage);
-                        if (Math.Abs(heart.heart.amount - 1) < 0.05)
-                        {
-                            if (heartUI.numberOfHearts == heartUI.uiHearts.Count) break;
-                            heartUI.lastDamagedHeart++;
-                            heartUI.numberOfHearts++;
-                        }
+                        indexes.Add(index);
                     }
                 }
-            }
+            indexes.Sort();
+            for (var i = 0; i < count; i++)
+                {
+                    if(indexes.Count >= 1)
+                    {
+                        var heart = heartUI.uiHearts[indexes[0]];         
+
+                        Debug.Log(indexes[0]);
+                        heart.heart.amount += 0.5f;
+                        Debug.Log(heart.heart.amount);
+                        heart.UpdateHeart(heart.heart);
+                        gameObject.GetComponent<CharacterStats>().HealthController.ChangeHealth(-0.5f);
+                        if (heart.heart.amount >= 1)
+                        {
+                            var ind = indexes[0];
+                            if(heartUI.numberOfHearts < heartUI.uiHearts.Count)
+                            {
+                                heartUI.numberOfHearts++;
+                                heartUI.lastDamagedHeart++; 
+
+                                
+                            }
+                            indexes.RemoveAt(0);
+                        }
+                    }
+                    
+                }
+
         }
+
     }
 
     public void MaxHealth(int maxLife)

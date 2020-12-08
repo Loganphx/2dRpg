@@ -732,6 +732,14 @@
             <e p="Item.cs" t="Include" />
             <e p="ItemDatabase.cs" t="Include" />
           </e>
+          <e p="LevelGeneration" t="Include">
+            <e p="DoorController.cs" t="Include" />
+            <e p="DungeonGeneration.cs" t="Include" />
+            <e p="FloorSpike.cs" t="Include" />
+            <e p="MiniMapController.cs" t="Include" />
+            <e p="Room.cs" t="Include" />
+            <e p="RoomsDoorsController.cs" t="Include" />
+          </e>
           <e p="MoveDirection.cs" t="Include" />
           <e p="Player" t="Include">
             <e p="CharacterStats.cs" t="Include" />

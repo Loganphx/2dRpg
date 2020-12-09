@@ -27,16 +27,14 @@ namespace Projectiles.Fireball
             
         }
 
-        public override void OnTriggerEnter2D(Collider2D collidesWith)
+        public override bool OnTriggerEnter2D(Collider2D collidesWith)
         {
-            base.OnTriggerEnter2D(collidesWith);
+            var collided = base.OnTriggerEnter2D(collidesWith);
             
-            if (collidesWith.CompareTag("Player") || collidesWith.gameObject.name == gameObject.name)
-            {
-                return;
-            }
-            
-            Destroy(this.gameObject);
+            if (collided)
+                Destroy(this.gameObject);
+
+            return false;
         }
         
         

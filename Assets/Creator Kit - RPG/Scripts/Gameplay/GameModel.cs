@@ -5,6 +5,7 @@ using Inventory;
 using RPGM.Core;
 using RPGM.Gameplay;
 using RPGM.UI;
+using Scripts.Gameplay;
 using UnityEngine;
 
 namespace RPGM.Gameplay

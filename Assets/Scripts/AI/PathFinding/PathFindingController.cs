@@ -7,8 +7,11 @@ using System.Linq;
 using System.Threading;
 using DefaultNamespace.AI.Models;
 using DefaultNamespace.AI.PathFinding;
+using DefaultNamespace.Helpers;
+using Helpers;
 using Ludiq;
 using Tiles;
+using UnityEngine.Internal;
 using UnityEngine.Tilemaps;
 using Debug = UnityEngine.Debug;
 
@@ -25,16 +28,28 @@ public class PathFindingController : MonoBehaviour
     public PathFindingResponse pathFindingResponse;
     private TileMapController tileMapController;
 
-    private int frames = 0;
-    private Coroutine currentRoutine;
+    protected int frames = 0;
+    public Coroutine currentRoutine;
+    public GameObject[] potentialTargets;
+    
+    [SerializeField] private float AiSpeed;
+
+    [Range(1, 100)]
+    public float stopDistance = 1; 
+    
+    [Range(1, 100)]
+    public float seekingDistance = 0; 
 
     // [SerializeField] private PathFindingResponse pathFindingResponse;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         tileMapController = FindObjectOfType<TileMapController>();
-        CalculatePathAndStartMovementCoroutine();
+        
+        potentialTargets = new GameObject[] { };
+        potentialTargets = GameObject.FindGameObjectsWithTag("Player");
+        
         _awake = false;
     }
 
@@ -43,13 +58,54 @@ public class PathFindingController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
+        if (targetLocation != null)
+        {
+            var d = Vector3.Distance(transform.position, targetLocation.transform.position);
+            if (d <= stopDistance)
+            {
+                if (currentRoutine != null)
+                {
+                    StopCoroutine(currentRoutine);
+                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;    
+                }
+            }   
+        }
+
         frames++;
         if (frames % 300 == 0) { //If the remainder of the current frame divided by 10 is 0 run the function.
-            if (Vector3.Distance(transform.position, targetLocation.transform.position) > 1.5f)
+
+            float? lowestDistance = null;
+            int lowestIndex = 0;
+            int index = 0;
+            foreach (var target in potentialTargets)
             {
+                var distance = Vector3.Distance(transform.position, target.transform.position);
+                if (lowestDistance == null)
+                {
+                    lowestDistance = distance;
+                    lowestIndex = index;
+                }
+
+                if (distance < lowestDistance)
+                {
+                    lowestDistance = distance;
+                    lowestIndex = index;
+                }
+
+                index += 1;
+            }
+
+            if (lowestDistance >= stopDistance && lowestDistance <= seekingDistance)
+            {
+                targetLocation = potentialTargets[lowestIndex];
                 CalculatePathAndStartMovementCoroutine();
+            }
+            else
+            {
+                if (currentRoutine != null)
+                    StopCoroutine(currentRoutine);
             }
             frames = 0;
         }
@@ -67,10 +123,24 @@ public class PathFindingController : MonoBehaviour
 
     private IEnumerator MoveSprite(List<WorldTile> finalNodePath)
     {
-        WaitForSeconds wait = new WaitForSeconds( .33f ) ;
+        WaitForSeconds wait = new WaitForSeconds( .15f ) ;
         foreach (WorldTile node in finalNodePath)
         {
-            transform.position = node.LocalPlace;
+            var moveDirectionNeeded = XYToMoveDirectionHelper.XYToMoveDirection(
+                new Vector2Int((int) transform.position.x, (int) transform.position.y),
+                new Vector2Int(node.LocalPlace.x, node.LocalPlace.y));
+
+            var vectorVelocity = new MoveDirectionToVelocity(moveDirectionNeeded).Velocity;
+            Debug.Log(vectorVelocity);
+
+            if (vectorVelocity != Vector2.zero)
+                GetComponent<Rigidbody2D>().velocity = vectorVelocity * AiSpeed;
+                
+            if (vectorVelocity == Vector2.zero)
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            
+            // transform.position = node.LocalPlace;
+            
             yield return wait;
         }
 

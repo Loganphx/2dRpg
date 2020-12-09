@@ -623,14 +623,7 @@ MonoBehaviour:
   bossRoomPrefabs:
   - {fileID: 1470235822813613277, guid: 4496c39fdfd214d42be8b1f4de42c1c5, type: 3}
   mainDirection: 0
-  lastSplitDirection: 0
-  NDoor: {fileID: 21319535471420295, guid: 9c3931afa9dbc9841b1c514651234ff1, type: 3}
-  SDoor: {fileID: 2227908397433715312, guid: e11aef51b26e83846823cde61a14df53, type: 3}
-  EDoor: {fileID: 2154786460560603368, guid: 983eef30cd623854385b71d11810e46c, type: 3}
-  WDoor: {fileID: 4640087418586357292, guid: e265dd66b44617044bf625e3f9a6b8f2, type: 3}
   roomObject: {fileID: 0}
-  existingDoors: []
-  roomText: {fileID: 0}
 --- !u!4 &1272840093
 Transform:
   m_ObjectHideFlags: 0
@@ -5240,3 +5233,77 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &5999949686402273882
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.7572114
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.60544
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083159, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083161, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: m_Name
+      value: ogre_run_anim_f3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999949685070083166, guid: dfaa14407dfbb4249bfbdcc7e976075c,
+        type: 3}
+      propertyPath: stopDistance
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dfaa14407dfbb4249bfbdcc7e976075c, type: 3}

@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5329388312712356397}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.74, y: -3.82, z: 0}
   m_LocalScale: {x: 2.475743, y: 2.475743, z: 0.24757431}
   m_Children: []
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: c09680efbb4f5824c86dbda930b02c51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &2595647906048243350
@@ -138,11 +138,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51bc2cd90c1a0b74598dfc761786ca47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 2
-  projectileDamage: 1
+  projectileSpeed: 4
+  projectileDamage: -2
   projectileGameObject: {fileID: 5329388312712356397}
+  projectileOwner: {fileID: 0}
   rigidBody: {fileID: 5470502007998020287}
-  moveDirection: 3
+  moveDirection: 0
   spriteRenderer: {fileID: 75574970756883151}
   playerSpeed: 0
 --- !u!70 &4156956692769767875

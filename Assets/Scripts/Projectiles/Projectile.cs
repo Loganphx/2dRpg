@@ -85,7 +85,7 @@ namespace Projectiles
         /// Overrideable Trigger For All Projectiles
         /// </summary>
         /// <param name="collidesWith">GameObject Collided With</param>
-        public virtual void OnTriggerEnter2D(Collider2D collidesWith)
+        public virtual bool OnTriggerEnter2D(Collider2D collidesWith)
         {
             Debug.Log($"PROJECTILE hit! {collidesWith.tag}, {collidesWith.name}");
             var tag = collidesWith.tag;
@@ -93,17 +93,38 @@ namespace Projectiles
             {
                 case "Player":
                     if (projectileOwner.CompareTag("AI"))
+                    {
                         collidesWith.GetComponent<Damage>().DamageCharacter(collidesWith, -projectileDamage);
+                        return true;
+                    }
                     break;
 
                 case "Walls":
                     break;
 
                 case "AI":
+                    Debug.Log("AI HIT");
                     if (projectileOwner.CompareTag("Player"))
+                    {
+                        Debug.Log("AI DAMAGED!!!");
                         collidesWith.GetComponent<Damage>().DamageCharacter(collidesWith, -projectileDamage);
+                        return true;
+                    }
+                    break;
+                
+                case "Untagged":
+                    switch (collidesWith.name)
+                    {
+                        case "Water":
+                            return false;
+                        case "Foreground":
+                            return true;
+                    }
+
                     break;
             }
+
+            return false;
         }
     }
 }

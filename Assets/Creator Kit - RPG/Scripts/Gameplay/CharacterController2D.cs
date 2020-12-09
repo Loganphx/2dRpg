@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Bolt;
 using DefaultNamespace;
 using Ludiq;
 using Player;
-using Projectiles;
 using Projectiles.Fireball;
-using RPGM.Gameplay;
-using Scripts.Gameplay;
 using Stats;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.U2D;
-using UnityEngine.UIElements;
 
-namespace RPGM.Gameplay
+namespace Scripts.Gameplay
 {
     /// <summary>
     /// A simple controller for animating a 4 directional sprite using Physics.

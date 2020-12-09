@@ -6,6 +6,7 @@ namespace Stats
     {
         public float baseDamage;
         public float attackRate;
+        public float attackRange;
 
 
         /// <summary>

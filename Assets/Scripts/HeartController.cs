@@ -27,27 +27,33 @@ public class HeartController : MonoBehaviour
     /// <param name="damage"></param>
     public void DamagePlayer(float damage)
     {
+        var count = (int)Math.Floor(damage / 0.5);
         //Changes player HP.
-        healthComponent.ChangeHealth(damage);
 
         //Runs logic to update player heart UI.
-        var index = int.Parse(heartUI.numberOfHearts - 1 + "");
-        var heart = heartUI.uiHearts[index];
-        if (heart.heart.amount <= 0)
+        for (var i = 0; i < count; i++)
         {
-            heart = heartUI.uiHearts[index - 1];
-        }
-        heartUI.lastDamagedHeart = index;
-        heart.heart.amount -= damage;
-        Debug.Log(heart.heart.amount);
-        heart.UpdateHeart(heart.heart);
-        if (heart.heart.amount <= 0)
-        {
-            heartUI.numberOfHearts--;
-        }
+            var index = Convert.ToInt32(heartUI.numberOfHearts - 1);
+            var heart = heartUI.uiHearts[index];
+            if (heart.heart.amount <= 0)
+            {
+                heart = heartUI.uiHearts[index - 1];
+            }
+            heartUI.lastDamagedHeart = index;
+            heart.heart.amount -= 0.5f;
+            heart.UpdateHeart(heart.heart);
+            healthComponent.ChangeHealth(0.5f);
 
+            if (heart.heart.amount <= 0)
+            {
+                heartUI.numberOfHearts--;
+            }
+        }
     }
-
+    /// <summary>
+    /// Heals Player and Updates UI accordingly. Adds Health in increments of 0.5.
+    /// </summary>
+    /// <param name="damage"></param>
     public void HealPlayer(float damage)
     {
         if (-damage % 0.5 == 0)
